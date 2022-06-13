@@ -59,6 +59,8 @@ const putUsers = async (req = request, res = response) => {
 const deleteUsers = async(req, res = response) => {
 
     const {id} = req.params;
+    
+    const activeUser = req.user;
 
     //Delete from DB
     // const user = await User.findByIdAndDelete( id );
@@ -66,7 +68,7 @@ const deleteUsers = async(req, res = response) => {
     //Set the user Status to false
     const user = await User.findByIdAndUpdate( id, {status: false});
 
-    res.json(user);
+    res.json({user, activeUser});
 }
 
 module.exports = {
